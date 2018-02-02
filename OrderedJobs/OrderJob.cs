@@ -8,7 +8,7 @@ namespace OrderedJobs
     {
         List<Job> jobs = new List<Job>();
         List<Char> result = new List<Char>();
-
+         
         public void Register(Job job)
         {
             jobs.Add(job);
