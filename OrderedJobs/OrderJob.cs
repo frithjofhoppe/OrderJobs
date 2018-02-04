@@ -11,7 +11,7 @@ namespace OrderedJobs
         List<Job> jobs = new List<Job>();
         List<Char> result = new List<Char>();
         List<Char> tempResult = new List<Char>();
-         
+
         public void Register(Job job)
         {
             jobs.Add(job);
@@ -41,21 +41,22 @@ namespace OrderedJobs
                     trace.ForEach(chr => result.Add(chr.jobA));
                 }
                 result.Reverse();
-            }catch(CircularReferenceException exception)
+            }
+            catch (CircularReferenceException exception)
             {
                 Console.WriteLine("Zirkelbezug aufgetreten");
                 Console.ReadLine();
             }
         }
 
-        private List<Job> getOrderedTraceByJob(List<Job> list ,Job job, int level)
+        private List<Job> getOrderedTraceByJob(List<Job> list, Job job, int level)
         {
             List<Job> dependencies = searchDependenciesByJob(jobs, job);
 
             if (hasCircularReferenceOccured(list, job)) throw new CircularReferenceException("Zirkelbezug augetreten");
             if (((int)job.jobA) > 0)
             {
-                if (!isJobAlreadyOrdered(list,job.jobA)) { list.Add(new Job(job.jobA, level)); }
+                if (!isJobAlreadyOrdered(list, job.jobA)) { list.Add(new Job(job.jobA, level)); }
             }
             foreach (Job j in dependencies)
             {
@@ -81,7 +82,7 @@ namespace OrderedJobs
         private bool hasCircularReferenceOccured(List<Job> list, Job job)
         {
             List<Job> result = list.FindAll(j => j.jobA == job.jobA && j.level == 1);
-            if(result.Count > 0)
+            if (result.Count > 0)
             {
                 return true;
             }
@@ -93,14 +94,14 @@ namespace OrderedJobs
             return list.OrderByDescending(j => j.level).ToList();
         }
 
-        private bool isJobAlreadyOrdered(List<Job> temporaryList,char toFind)
+        private bool isJobAlreadyOrdered(List<Job> temporaryList, char toFind)
         {
             bool back = true;
             bool local = true;
             bool global = true;
 
             if ((((int)result.Find(r => r == toFind)) == 0) && (((int)toFind) != 0)) global = false;
-           
+
             Job j = temporaryList.Find(r => r.jobA == toFind);
             if (j != null)
             {
