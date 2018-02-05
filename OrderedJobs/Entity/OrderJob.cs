@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace OrderedJobs
 {
-    class OrderJob : IOrderedJobs
+    public class OrderJob : IOrderedJobs
     {
         List<Job> jobs = new List<Job>();
         List<Char> result = new List<Char>();
@@ -30,24 +30,18 @@ namespace OrderedJobs
             bool isOrdering = false;
 
             if (jobs.Count > 0) { isOrdering = true; }
-            try
+            else { throw new OrderJobSortException("The count of the argument is invalid"); }
+
+            while (isOrdering)
             {
-                while (isOrdering)
-                {
-                    List<Job> unhandled = jobs.FindAll(j => j.isHandled == false);
-                    if (unhandled.Count == 0) { break; }
-                    unhandled[0].isHandled = true;
-                    List<Job> trace = sortByLevel(getOrderedTraceByJob(new List<Job>(), unhandled[0], 1));
-                    trace.Reverse();
-                    trace.ForEach(chr => result.Add(chr.jobA));
-                }
-                result.Reverse();
+                List<Job> unhandled = jobs.FindAll(j => j.isHandled == false);
+                if (unhandled.Count == 0) { break; }
+                unhandled[0].isHandled = true;
+                List<Job> trace = sortByLevel(getOrderedTraceByJob(new List<Job>(), unhandled[0], 1));
+                trace.Reverse();
+                trace.ForEach(chr => result.Add(chr.jobA));
             }
-            catch (CircularReferenceException exception)
-            {
-                Console.WriteLine("Zirkelbezug aufgetreten");
-                Console.ReadLine();
-            }
+            result.Reverse();
         }
 
         private List<Job> getOrderedTraceByJob(List<Job> list, Job job, int level)

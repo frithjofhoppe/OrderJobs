@@ -14,10 +14,8 @@ namespace OrderedJobs
             //o.Register(new Job('c', 'b'));
             o.Register(new Job('a', 'b'));
             o.Register(new Job('a', 'c'));
-            o.Register(new Job('b', 'f'));
-            o.Register(new Job('f', 'a'));
-            //o.Register(new Job('d'));
-            //o.Register(new Job('c', 'f'));
+            o.Register(new Job('d'));
+            o.Register(new Job('c', 'f'));
             //o.Register(new Job('a', 'b'));
             //o.Register(new Job('b', 'a'));
             Console.WriteLine("Reihenfolge: ");

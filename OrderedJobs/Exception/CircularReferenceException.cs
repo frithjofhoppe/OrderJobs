@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OrderedJobs
 {
-    class CircularReferenceException : Exception
+    public class CircularReferenceException : Exception
     {
         public CircularReferenceException()
         {

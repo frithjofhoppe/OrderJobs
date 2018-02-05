@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OrderedJobs
 {
-    interface IOrderedJobs
+    public interface IOrderedJobs
     {
         void Register(Job job);
         string Sort();
