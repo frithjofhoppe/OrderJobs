@@ -7,7 +7,7 @@ namespace OrderedJobs
     [TestClass]
     public class OrderJobTest
     {
-        [TestMethod]
+        [TestMethod] 
         public void SortJob_WithCircularReferenceDependencies_ThrowsCircurlarReferenceException()
         {
             IOrderedJobs orderJob = new OrderJob();
